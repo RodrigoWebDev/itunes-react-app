@@ -1,13 +1,9 @@
 //Libs
 import React, { Component } from "react"
 import axios from "axios"
-import Pagination from "../components/Pagination"
-import Char from "../components/Char"
+import Card from "../components/Card"
 import Loader from "../components/Loader"
 import Helmet from 'react-helmet'
-
-//Images
-import logo from "../images/Starwars.png"
 
 class IndexPage extends Component {
 
@@ -17,13 +13,11 @@ class IndexPage extends Component {
         super(props);
         this.state = {
             info: [],
-            nextPage: null,
-            prevPage: null,
-            isFetching: false
+            query: ''
         }
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         this.setLoader(true);
         axios.get("https://swapi.co/api/people/")
             .then(data => {
@@ -38,79 +32,59 @@ class IndexPage extends Component {
             .catch(error => {
                 console.log(error);
             });
+    }*/
 
-
-            axios.get('http://itunes.apple.com/search?term=justin+bieber')
-        .then(function (response) {
-            console.log("itunes >",response);
+    handleChange = e => {
+        let value = e.target.value;
+        this.setState({
+            query: value
         })
-        .catch(function (error) {
+    }
+
+    handleClick = e => {
+        this.setLoader(true);
+
+        let queryString = this.state.query.trim().split(' ').join("+");
+
+        console.log(queryString);        
+        axios.get(`http://itunes.apple.com/search?term=${queryString}`)
+        .then( (response) => {
+            console.log("itunes >",response.data.results);
+            this.setState({
+                info: response.data.results
+            });
+
+            this.setLoader(false);
+        })
+        .catch( (error) => {
             console.log(error);
         })
     }
 
-    handlePagination = (url) => {
-        //Colocando return, evita da função ser invocada na view sem o evento de click
-        return (e) => {
-            this.setLoader(true);
-            axios.get(url)
-                .then(data => {
-
-                    let _data = data.data.results;
-                    let _next = data.data.next;
-                    let _prev = data.data.previous;
-
-                    this.setState({
-                        info: _data,
-                        nextPage: _next,
-                        prevPage: _prev,
-                    })
-
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-                .finally(() => {
-                    this.setLoader(false);
-                })
-        }
-    };
-
     render() {
-
-        const nextPage = this.state.nextPage;
-        const prevPage = this.state.prevPage;
         const isFetching = this.state.isFetching;
 
         return (
             <>
                 <Helmet>
-                    <title>Star Wars App</title>
+                    <title>Itunes Search App</title>
                 </Helmet>
                 <div className="container">
-                    <img className="logo" src={logo} />
+                    <h1>Itunes Search App</h1>
+                        <input onChange={this.handleChange} type="text"/>
+                        <button onClick={this.handleClick}>Show Records</button>
                     {isFetching && <Loader />}
                     {!isFetching &&
                         <ul>
                             {
                                 this.state.info.map(i => (
-                                    <li key={i.name}>
-                                        <Char info={i} />
+                                    <li key={i.trackId}>
+                                        <Card info={i} />
                                     </li>
                                 ))
                             }
                         </ul>
                     }
-                    <Pagination
-                        handleNextPage={this.handlePagination(nextPage)}
-                        handlePrevPage={this.handlePagination(prevPage)}
-                        btnPrevState={prevPage}
-                        btnNextState={nextPage}
-                        currentPage={this.state.currentPage}
-                    />
-                    <footer>
-                        Developed by <a href="http://rqueiroz.netlify.com/" target="_blank"> me </a> :)
-                    </footer>
                 </div>
             </>
         )
