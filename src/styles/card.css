@@ -1,3 +1,26 @@
 .card{
     background: white;
 }
+
+.card-name {
+    margin-top: 16px;
+    font-size: 16px;
+    opacity: .5;
+}
+
+.track-name {
+    margin-top: 7px;
+}
+
+.card-info {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card-info span {
+    margin-right: 16px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}

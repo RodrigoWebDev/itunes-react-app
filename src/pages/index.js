@@ -5,6 +5,7 @@ import Card from "../components/Card"
 import Loader from "../components/Loader"
 import Helmet from 'react-helmet'
 
+
 class IndexPage extends Component {
 
     setLoader = (action) => this.setState({ isFetching: action });
@@ -17,23 +18,6 @@ class IndexPage extends Component {
         }
     }
 
-    /*componentDidMount() {
-        this.setLoader(true);
-        axios.get("https://swapi.co/api/people/")
-            .then(data => {
-                let _data = data.data.results;
-                this.setState({
-                    info: _data,
-                    nextPage: data.data.next,
-                    prevPage: data.data.previous
-                });
-                this.setLoader(false);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }*/
-
     handleChange = e => {
         let value = e.target.value;
         this.setState({
@@ -44,21 +28,21 @@ class IndexPage extends Component {
     handleClick = e => {
         this.setLoader(true);
 
-        let queryString = this.state.query.trim().split(' ').join("+");
+        let queryString = this.state.query.trim().split(' ').join("+").toLowerCase();
 
-        console.log(queryString);        
+        console.log(queryString);
         axios.get(`http://itunes.apple.com/search?term=${queryString}`)
-        .then( (response) => {
-            console.log("itunes >",response.data.results);
-            this.setState({
-                info: response.data.results
-            });
+            .then((response) => {
+                console.log("itunes >", response.data.results);
+                this.setState({
+                    info: response.data.results
+                });
 
-            this.setLoader(false);
-        })
-        .catch( (error) => {
-            console.log(error);
-        })
+                this.setLoader(false);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     render() {
@@ -70,10 +54,12 @@ class IndexPage extends Component {
                     <title>Itunes Search App</title>
                 </Helmet>
                 <div className="container">
-                    <h1>Itunes Search App</h1>
-                        <input onChange={this.handleChange} type="text"/>
+                    <div className="hero">
+                        <h1>Itunes Search App</h1>
+                        <input onChange={this.handleChange} type="text" />
                         <button onClick={this.handleClick}>Show Records</button>
-                    {isFetching && <Loader />}
+                        {isFetching && <Loader />}
+                    </div>
                     {!isFetching &&
                         <ul>
                             {

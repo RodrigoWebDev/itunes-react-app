@@ -1,22 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap');
 
-:root{
-    --c0: black;
-    --c1: #6b84f3;
-    --c2: #f36bb1;
-    --c3: #f3a06b;
-    --font: 'Open Sans', sans-serif;
-}
-
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body{
-    font-family: var(--font), Arial, Helvetica, sans-serif;
-        color: var(--c0);
-        background: url(../images/bg.webp);
-        background-attachment: fixed;
+    font-family: 'Open Sans', sans-serif, Arial, Helvetica, sans-serif;
+    color: rgba(0,0,0.8);
+    background-attachment: fixed;
 }
 
 img{
@@ -24,101 +17,53 @@ img{
     height: auto;
 }
 
-h1 span {
-    font-weight: bold;
+input[type="text"] {
+    border: none;
+    border-radius: 100px;
+    height: 34px;
+    width: 250px;
+    padding: 0 16px;
 }
 
-h1 {
-    font-weight: normal;
+button {
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 22px;
+    background: white;
+    border: none;
+    margin-top: 17px;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(140deg, #fe7142 0%, #cb4fc2 50%, #9A57E8 75%, #53A0E8 100%);
+    color:white;
+    height: 300px;
+    margin-bottom: 50px;
+}
+
+ul > li {
+    flex-basis: 25%;
+    padding: 0 16px;
+    list-style: none;
+    margin-bottom: 70px;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
-}
-
-a{
-    color: #CCCCCC;
-    text-decoration: underline;
-}
-
-a:hover{
-    color: white;
-    transition: .2s;
-}
-
-.container{
-    padding: 30px 16px 0 16px;
-}
-
-.logo {
-    margin: 0 auto;
-    display: block;
-    filter: invert(1);
-    max-width: 290px;
-}
-
-.btn {
-    background-color: #ffea00;
-    color: #000000;
-    border-color: #ffea00;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    font-size: 1rem;
-    line-height: 1.125rem;
-    font-weight: 800;
-    letter-spacing: 0.025rem;
-    padding: 12px 32px 9px;
-    border-radius: 4px;
-    margin-top: 14px;
-    margin-bottom: 14px;
-    transition: background-color 100ms linear, border-color 100ms linear, box-shadow 100ms linear;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #FFF347;
-    border-color: #FFF347;
-    box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.3);
-}
-
-.btn[disabled] {
-    opacity: .5;
-    cursor: auto;
-}
-
-.btn[disabled]:hover {
-    background-color: #ffea00;
-    box-shadow: none;
-    border-color: #ffea00;
-}
-
-footer{
-    text-align: center;
-    background-color: black;
-    background-image: url(../images/vader.jpg);
-    height: 272px;
-    background-position: center top;
-    background-repeat: no-repeat;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #CCCCCC;
-}
-
-footer a {
-    margin: 0 7px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 @media(min-width: 900px){
-    ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
     ul > li {
-        flex-basis: 32%;
-        width: 32%;
+        flex-basis: 100%;
+        width: 100%;
     }
 }
+
