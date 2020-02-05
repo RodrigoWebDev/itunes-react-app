@@ -3,7 +3,6 @@ import "../styles/card.css"
 import img from "../images/music.jpg"
 
 const Card = ({ info }) => {
-    console.log(info.releaseDate);
     const date = new Date(info.releaseDate);
     let dateString = `${date.getMonth() + 1}/${date.getDay()}/${date.getFullYear()}`
 
