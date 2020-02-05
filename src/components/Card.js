@@ -7,8 +7,8 @@ const Card = ({ info }) => {
     let dateString = `${date.getMonth() + 1}/${date.getDay()}/${date.getFullYear()}`
 
     return (
-        <div className="card">
-            <img src={img} alt="music" />
+        <div data-testid="card" className="card">
+            <img data-testid="img" src={img} alt="music" />
             <h2 className="card-name">{info.artistName}</h2>
             <h3 className="track-name">{info.trackName}</h3>
             <div className="card-info">

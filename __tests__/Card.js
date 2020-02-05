@@ -1,8 +1,26 @@
 import React from "react"
-import renderer from "react-test-renderer"
+import Card from "../src/components/Card"
+import { render, fireEvent } from "@testing-library/react"
 
-describe("General Test", () => {
-  it(" 1 + 1 = 2", () => {
-    expect(1 + 1).toBe(2)
+describe("Card Component", () => {
+  it("Card should contain a img", () => {
+    
+    const { getByTestId } = render(<Card info=""/>)
+
+    expect(getByTestId("card"))
+
   })
+
+  it("Card info should start as undefined", () => {
+    const { getByTestId } = render(<Card info={[]}/>)
+
+    expect(getByTestId("card").info).toBe(undefined)
+  })
+
+  it("Card should contain artistName, trackName, dateString, primaryGenreName and infoTrackPrice", () => {
+    const { getByTestId } = render(<Card info={["item1", "item2"]}/>)
+
+    expect(getByTestId("card").info)
+  })
+
 })

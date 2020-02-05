@@ -2,8 +2,8 @@
 import React, { Component } from "react"
 import axios from "axios"
 import Card from "../components/Card"
-import Loader from "../components/Loader"
 import Helmet from 'react-helmet'
+import Hero from '../components/Hero'
 
 
 class IndexPage extends Component {
@@ -30,10 +30,8 @@ class IndexPage extends Component {
 
         let queryString = this.state.query.trim().split(' ').join("+").toLowerCase();
 
-        console.log(queryString);
         axios.get(`http://itunes.apple.com/search?term=${queryString}`)
             .then((response) => {
-                console.log("itunes >", response.data.results);
                 this.setState({
                     info: response.data.results
                 });
@@ -54,12 +52,12 @@ class IndexPage extends Component {
                     <title>Itunes Search App</title>
                 </Helmet>
                 <div className="container">
-                    <div className="hero">
-                        <h1>Itunes Search App</h1>
-                        <input onChange={this.handleChange} type="text" />
-                        <button onClick={this.handleClick}>Show Records</button>
-                        {isFetching && <Loader />}
-                    </div>
+                    <Hero 
+                        isFetching={isFetching}
+                        handleClick={this.handleClick}
+                        handleChange={this.handleChange}
+                    />
+
                     {!isFetching &&
                         <ul>
                             {
